@@ -268,5 +268,5 @@ the query to the new visible map area after a user scrolls.
 - In your local environment set `$BINTRAY_USER` and `$BINTRAY_KEY` to your
   Bintray.com username and API key.
 - Checkout and update the master branch.
-- Run `./release.sh` to build and deploy.
+- Run `./gradlew clean :library:prepareArtifacts :library:bintrayUpload`
 - On bintray.com, publish the draft artifacts.
