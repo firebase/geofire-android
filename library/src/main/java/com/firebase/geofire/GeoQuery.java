@@ -28,6 +28,8 @@
 
 package com.firebase.geofire;
 
+import android.support.annotation.NonNull;
+
 import com.firebase.geofire.core.GeoHash;
 import com.firebase.geofire.core.GeoHashQuery;
 import com.firebase.geofire.util.GeoUtils;
@@ -67,33 +69,33 @@ public class GeoQuery {
 
     private final ChildEventListener childEventLister = new ChildEventListener() {
         @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
             synchronized (GeoQuery.this) {
                 GeoQuery.this.childAdded(dataSnapshot);
             }
         }
 
         @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
             synchronized (GeoQuery.this) {
                 GeoQuery.this.childChanged(dataSnapshot);
             }
         }
 
         @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
+        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
             synchronized (GeoQuery.this) {
                 GeoQuery.this.childRemoved(dataSnapshot);
             }
         }
 
         @Override
-        public synchronized void onChildMoved(DataSnapshot dataSnapshot, String s) {
+        public synchronized void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
             // ignore, this should be handled by onChildChanged
         }
 
         @Override
-        public synchronized void onCancelled(DatabaseError databaseError) {
+        public synchronized void onCancelled(@NonNull DatabaseError databaseError) {
             // ignore, our API does not support onCancelled
         }
     };
@@ -214,7 +216,7 @@ public class GeoQuery {
     private void addValueToReadyListener(final Query firebase, final GeoHashQuery query) {
         firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 synchronized (GeoQuery.this) {
                     GeoQuery.this.outstandingQueries.remove(query);
                     GeoQuery.this.checkAndFireReady();
@@ -222,7 +224,7 @@ public class GeoQuery {
             }
 
             @Override
-            public void onCancelled(final DatabaseError databaseError) {
+            public void onCancelled(@NonNull final DatabaseError databaseError) {
                 synchronized (GeoQuery.this) {
                     for (final GeoQueryDataEventListener listener : GeoQuery.this.eventListeners) {
                         GeoQuery.this.geoFire.raiseEvent(new Runnable() {
@@ -301,7 +303,7 @@ public class GeoQuery {
         if (info != null) {
             this.geoFire.getDatabaseRefForKey(key).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(final DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                     synchronized(GeoQuery.this) {
                         GeoLocation location = GeoFire.getLocationValue(dataSnapshot);
                         GeoHash hash = (location != null) ? new GeoHash(location) : null;
@@ -323,7 +325,7 @@ public class GeoQuery {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     // tough luck
                 }
             });

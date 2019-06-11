@@ -1,6 +1,7 @@
 package com.firebase.geofire.testing;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -113,7 +114,7 @@ public final class GeoFireTestingRule {
         final SimpleFuture<DatabaseError> futureError = new SimpleFuture<DatabaseError>();
         databaseReference.setValue(value, new DatabaseReference.CompletionListener() {
             @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+            public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 futureError.put(databaseError);
             }
         });
@@ -177,12 +178,12 @@ public final class GeoFireTestingRule {
         final Semaphore semaphore = new Semaphore(0);
         geoFire.getDatabaseReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 semaphore.release();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Assert.fail("Firebase error: " + databaseError);
             }
         });

@@ -1,5 +1,6 @@
 package com.firebase.geofire;
 
+import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -55,12 +56,12 @@ public class GeoFireIT {
         final SimpleFuture<Object> future = new SimpleFuture<>();
         geoFire.getDatabaseReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 future.put(dataSnapshot);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 future.put(databaseError);
             }
         });
@@ -182,7 +183,7 @@ public class GeoFireIT {
             put("g", "7zzzzzzzzz"); // this is wrong but we don't care in this test
         }}, "7zzzzzzzzz", new DatabaseReference.CompletionListener() {
             @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+            public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 semaphore.release();
             }
         });

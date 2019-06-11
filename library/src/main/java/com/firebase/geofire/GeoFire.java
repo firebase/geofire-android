@@ -28,6 +28,8 @@
 
 package com.firebase.geofire;
 
+import android.support.annotation.NonNull;
+
 import com.firebase.geofire.core.GeoHash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,7 +75,7 @@ public class GeoFire {
         }
 
         @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if (dataSnapshot.getValue() == null) {
                 this.callback.onLocationResult(dataSnapshot.getKey(), null);
             } else {
@@ -88,7 +90,7 @@ public class GeoFire {
         }
 
         @Override
-        public void onCancelled(DatabaseError databaseError) {
+        public void onCancelled(@NonNull DatabaseError databaseError) {
             this.callback.onCancelled(databaseError);
         }
     }
@@ -177,7 +179,7 @@ public class GeoFire {
         if (completionListener != null) {
             keyRef.setValue(updates, geoHash.getGeoHashString(), new DatabaseReference.CompletionListener() {
                 @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     completionListener.onComplete(key, databaseError);
                 }
             });
@@ -210,7 +212,7 @@ public class GeoFire {
         if (completionListener != null) {
             keyRef.setValue(null, new DatabaseReference.CompletionListener() {
                 @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     completionListener.onComplete(key, databaseError);
                 }
             });
