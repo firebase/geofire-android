@@ -11,6 +11,7 @@ android:
     - sys-img-x86-google_apis_playstore-26
   licenses:
     - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-preview-license-d099d938'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
   before-install:
@@ -22,6 +23,7 @@ android:
     - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c0de7af1a06de9f4b1727b84351f2910" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   before_script:
     - echo no | android create avd --force -n test -t android-26 --abi x86 -c 200M
+    - android list targets
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
