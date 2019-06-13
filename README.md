@@ -48,7 +48,7 @@ Add a dependency for GeoFire to your app's `build.gradle` file.
 
 ```groovy
 dependencies {
-    compile 'com.firebase:geofire-android:3.0.0'
+    implementation 'com.firebase:geofire-android:3.0.0'
 }
 ```
 
