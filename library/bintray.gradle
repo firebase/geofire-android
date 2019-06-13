@@ -100,7 +100,7 @@ bintray {
     def pomName = "${mavenArtifactId}-${mavenVersion}.pom"
 
     print("""
-    Copying POM file:
+    POM copy spec:
         | src=${pomSrc}
         | dst=${pomDst}
         | name=${pomName}
@@ -115,7 +115,7 @@ bintray {
     }
 
     print("""
-    Uploading Bintray Package:
+    Bintray package spec:
         | userOrg=${bintrayOrg} 
         | repo=${projectName}
         | name=${mavenArtifactId}
