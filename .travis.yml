@@ -1,5 +1,4 @@
 language: android
-dist: trusty
 sudo: true
 android:
   components:
@@ -11,6 +10,9 @@ android:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
+  before-install:
+    - yes | sdkmanager "platforms;android-27"
+    - yes | sdkmanager "platforms;android-28"
   before_script:
     - echo no | android create avd --force -n test -t android-27 --abi x86 -c 200M
     - emulator -avd test -no-audio -no-window &
