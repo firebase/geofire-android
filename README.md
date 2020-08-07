@@ -1,6 +1,6 @@
 # GeoFire for Android — Realtime location queries with Firebase
 
-[![Build Status](https://travis-ci.org/firebase/geofire-android.svg?branch=master)](https://travis-ci.org/firebase/geofire-android?branch=master)
+[![Actions Status][gh-actions-badge]][gh-actions]
 
 GeoFire is an open-source library for Android that allows you to store and query a
 set of keys based on their geographic location.
@@ -270,3 +270,6 @@ the query to the new visible map area after a user scrolls.
 - Checkout and update the master branch.
 - Run `./gradlew clean :library:prepareArtifacts :library:bintrayUpload`
 - On bintray.com, publish the draft artifacts.
+
+[gh-actions]: https://github.com/firebase/geofire-android/actions
+[gh-actions-badge]: https://github.com/firebase/geofire-android/workflows/Android%20CI/badge.svg
