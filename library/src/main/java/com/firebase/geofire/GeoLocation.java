@@ -15,10 +15,6 @@
  */
 package com.firebase.geofire;
 
-import android.support.annotation.NonNull;
-
-import com.firebase.geofire.core.GeoHash;
-
 /**
  * A wrapper class for location coordinates.
  */
