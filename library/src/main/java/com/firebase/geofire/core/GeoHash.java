@@ -15,6 +15,8 @@
  */
 package com.firebase.geofire.core;
 
+import android.support.annotation.NonNull;
+
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.util.Base32Utils;
 
@@ -31,6 +33,54 @@ public class GeoHash {
 
     // The maximal number of bits precision for a geohash
     public static final int MAX_PRECISION_BITS = MAX_PRECISION * Base32Utils.BITS_PER_BASE32_CHAR;
+
+    /**
+     * Convert a GeoHash string back into a GeoLocation.
+     *
+     * See: https://en.wikipedia.org/wiki/Geohash#Algorithm_and_example
+     */
+    @NonNull
+    public static GeoLocation locationFromHash(@NonNull String hashString) {
+        long decoded = 0;
+        long numBits = hashString.length() * Base32Utils.BITS_PER_BASE32_CHAR;
+
+        for (int i = 0; i < hashString.length(); i++) {
+            int charVal = Base32Utils.base32CharToValue(hashString.charAt(i));
+            decoded = decoded << Base32Utils.BITS_PER_BASE32_CHAR;
+            decoded = decoded + charVal;
+        }
+
+        double minLng = -180;
+        double maxLng = 180;
+
+        double minLat = -90;
+        double maxLat = 90;
+
+        for (int i = 0; i < numBits; i++) {
+            // Get the high bit
+            long bit = (decoded >> (numBits - i - 1)) & 1;
+
+            // Even bits are longitude, odd bits are latitude
+            if (i % 2 == 0) {
+                if (bit == 1) {
+                    minLng = (minLng + maxLng) / 2;
+                } else {
+                    maxLng = (minLng + maxLng) / 2;
+                }
+            } else {
+                if (bit == 1) {
+                    minLat = (minLat + maxLat) / 2;
+                } else {
+                    maxLat = (minLat + maxLat) / 2;
+                }
+            }
+        }
+
+        double lat = (minLat + maxLat) / 2;
+        double lng = (minLng + maxLng) / 2;
+
+        return new GeoLocation(lat, lng);
+    }
 
     public GeoHash(double latitude, double longitude) {
         this(latitude, longitude, DEFAULT_PRECISION);

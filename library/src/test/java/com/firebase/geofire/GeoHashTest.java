@@ -25,6 +25,9 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class GeoHashTest {
+
+    private static final double EPSILON = 0.01;
+
     @Rule
     public org.junit.rules.ExpectedException exception = ExpectedException.none();
 
@@ -46,6 +49,33 @@ public class GeoHashTest {
         Assert.assertEquals(new GeoHash("umghcygjj7"), new GeoHash(78.216667, 15.55));
         Assert.assertEquals(new GeoHash("4qpzmren1k"), new GeoHash(-54.933333, -67.616667));
         Assert.assertEquals(new GeoHash("4w2kg3s54y"), new GeoHash(-54, -67));
+    }
+
+    @Test
+    public void locationFromHash() {
+        assertHashRoundtrip(37.7853074, -122.4054274);
+        assertHashRoundtrip(38.98719, -77.250783);
+        assertHashRoundtrip(29.3760648, 47.9818853);
+        assertHashRoundtrip(78.216667, 15.55);
+        assertHashRoundtrip(-54.933333, -67.616667);
+        assertHashRoundtrip(-54, -67);
+
+        assertHashRoundtrip(0, 0);
+        assertHashRoundtrip(0, -180);
+        assertHashRoundtrip(0, 180);
+        assertHashRoundtrip(-90, 0);
+        assertHashRoundtrip(-90, -180);
+        assertHashRoundtrip(-90, 180);
+        assertHashRoundtrip(90, 0);
+        assertHashRoundtrip(90, -180);
+        assertHashRoundtrip(90, 180);
+    }
+
+    private void assertHashRoundtrip(double lat, double lng) {
+        String hashString = new GeoHash(lat, lng).getGeoHashString();
+        GeoLocation asLocation = GeoHash.locationFromHash(hashString);
+
+        Assert.assertEquals(lat, asLocation.latitude, EPSILON);
     }
 
     @Test
