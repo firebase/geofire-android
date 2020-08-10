@@ -7,24 +7,16 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName mavenVersion
+        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-}
-
-tasks.withType(Test) { 
-    testLogging {
-        exceptionFormat "full"
-        events "skipped", "passed", "failed"
     }
 }
 
@@ -33,13 +25,9 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.google.firebase:firebase-database:17.0.0'
-    api project(':common');
+    implementation 'com.android.support:support-annotations:27.1.1'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'com.android.support:support-annotations:27.1.1'
     testImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
-apply from: 'bintray.gradle'
