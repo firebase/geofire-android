@@ -13,14 +13,14 @@ import java.util.Set;
 /**
  * Database-agnostic utilities for creating and querying GeoHashes.
  */
-public class GeoHashUtils {
+public class GeoFireUtils {
 
     /**
      * Converts a lat/lng location into a GeoHash with default precision (10).
      */
     @NonNull
-    public static String getHashForLocation(@NonNull GeoLocation location) {
-        return getHashForLocation(location, 10);
+    public static String getGeoHashForLocation(@NonNull GeoLocation location) {
+        return getGeoHashForLocation(location, 10);
     }
 
     /**
@@ -31,16 +31,8 @@ public class GeoHashUtils {
      * @return the GeoHash string.
      */
     @NonNull
-    public static String getHashForLocation(@NonNull GeoLocation location, int precision) {
+    public static String getGeoHashForLocation(@NonNull GeoLocation location, int precision) {
         return new GeoHash(location.latitude, location.longitude, precision).getGeoHashString();
-    }
-
-    /**
-     * Converts a GeoHash string into a lat/lng location.
-     */
-    @NonNull
-    public static GeoLocation getLocationForHash(@NonNull String hash) {
-        return GeoHash.locationFromHash(hash);
     }
 
     /**
@@ -63,7 +55,7 @@ public class GeoHashUtils {
      * @return a list of query bounds containing between 1 and 9 queries.
      */
     @NonNull
-    public static List<GeoQueryBounds> getQueryBounds(@NonNull GeoLocation location, double radius) {
+    public static List<GeoQueryBounds> getGeoHashQueryBounds(@NonNull GeoLocation location, double radius) {
         List<GeoQueryBounds> result = new ArrayList<>();
         Set<GeoHashQuery> queries = GeoHashQuery.queriesAtLocation(location, radius);
         for (GeoHashQuery q : queries) {
