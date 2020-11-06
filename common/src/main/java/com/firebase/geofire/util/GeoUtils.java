@@ -17,9 +17,11 @@ package com.firebase.geofire.util;
 
 import com.firebase.geofire.GeoLocation;
 
-import static com.firebase.geofire.GeoFire.LOGGER;
+import java.util.logging.Logger;
 
 public final class GeoUtils {
+    public static Logger LOGGER = Logger.getLogger("GeoFire");
+
     private static final double MAX_SUPPORTED_RADIUS = 8587;
 
     private GeoUtils() {

@@ -3,7 +3,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 27
 
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
@@ -35,6 +34,7 @@ configurations.all {
 
 dependencies {
     api 'com.google.firebase:firebase-database:17.0.0'
+    api project(':common');
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.android.support:support-annotations:27.1.1'
@@ -42,4 +42,7 @@ dependencies {
     testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-apply from: 'bintray.gradle'
+ext {
+    moduleSuffix = ''
+}
+apply from: '../bintray.gradle'

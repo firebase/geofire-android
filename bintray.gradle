@@ -4,6 +4,8 @@ apply plugin: 'maven-publish'
 group = mavenGroup
 version = mavenVersion
 
+def moduleArtifactId = "${mavenArtifactId}${moduleSuffix}"
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -34,7 +36,7 @@ publishing {
         library(MavenPublication) {
 
             groupId mavenGroup
-            artifactId mavenArtifactId
+            artifactId moduleArtifactId
             version mavenVersion
 
             def releaseAar = "$buildDir/outputs/aar/${project.name}-release.aar"
@@ -80,9 +82,15 @@ publishing {
                 // Add all that are 'compile'
                 configurations.api.allDependencies.each {
                     def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+                    def isInternal = it.group == 'geofire-android';
+
+                    def depGroupId = isInternal ? group : it.group
+                    def depArtifactId = isInternal ? "geofire-android-$it.name" : it.name
+                    def depVersion = isInternal ? version : it.version
+
+                    dependencyNode.appendNode('groupId', depGroupId)
+                    dependencyNode.appendNode('artifactId', depArtifactId)
+                    dependencyNode.appendNode('version', depVersion)
                 }
             }
         }
@@ -96,8 +104,8 @@ bintray {
     publications = [ 'library' ]
 
     def pomSrc = "$buildDir/publications/library/pom-default.xml"
-    def pomDst = "com/firebase/$mavenArtifactId/$mavenVersion/"
-    def pomName = "${mavenArtifactId}-${mavenVersion}.pom"
+    def pomDst = "com/firebase/$moduleArtifactId/$mavenVersion/"
+    def pomName = "${moduleArtifactId}-${mavenVersion}.pom"
 
     print("""
     POM copy spec:
@@ -118,13 +126,13 @@ bintray {
     Bintray package spec:
         | userOrg=${bintrayOrg} 
         | repo=${projectName}
-        | name=${mavenArtifactId}
+        | name=${moduleArtifactId}
         | version=${mavenVersion}
     """)
 
     pkg {
         repo = projectName
-        name = mavenArtifactId
+        name = moduleArtifactId
         userOrg = bintrayOrg
         licenses = [ 'Apache-2.0' ]
         vcsUrl = "${githubUrl}.git"
