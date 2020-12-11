@@ -82,11 +82,18 @@ publishing {
                 // Add all that are 'compile'
                 configurations.api.allDependencies.each {
                     def dependencyNode = dependenciesNode.appendNode('dependency')
-                    def isInternal = it.group == 'geofire-android';
+                    def isInternal = it.group == 'com.firebase';
 
                     def depGroupId = isInternal ? group : it.group
-                    def depArtifactId = isInternal ? "geofire-android-$it.name" : it.name
+                    // TODO: It would be better if this line used moduleSuffix
+                    def depArtifactId = isInternal 
+                        ? it.name == "library" 
+                            ? "geofire-android" 
+                            : "geofire-android-$it.name" 
+                        : it.name
                     def depVersion = isInternal ? version : it.version
+
+                    println("dependency: $name --> $depGroupId:$depArtifactId:$depVersion")
 
                     dependencyNode.appendNode('groupId', depGroupId)
                     dependencyNode.appendNode('artifactId', depArtifactId)

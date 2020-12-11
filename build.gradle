@@ -32,7 +32,7 @@ ext {
 
     mavenGroup = 'com.firebase'
     mavenArtifactId = 'geofire-android'
-    mavenVersion = '3.0.0'
+    mavenVersion = '3.1.0'
 
-    bintrayOrg = 'firebase'
+    bintrayOrg = 'geofire'
 }
