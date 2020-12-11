@@ -48,11 +48,22 @@ Add a dependency for GeoFire to your app's `build.gradle` file.
 
 ```groovy
 dependencies {
+    // Full GeoFire library for Realtime Database users
     implementation 'com.firebase:geofire-android:3.1.0'
+
+    // GeoFire utililty functions for Cloud Firestore users who
+    // want to implement their own geo solution, see:
+    // https://firebase.google.com/docs/firestore/solutions/geoqueries
+    implementation 'com.firebase:geofire-android-common:3.1.0'
 }
 ```
 
 ## Usage
+
+There are two ways to use GeoFire:
+
+  - GeoFire - an end-to-end solution for adding simple geo queries to apps using Firebase Realtime Database.
+  - GeoFireUtils - a set of utilities that make it simple to build a geo query solution for any app, such as those using Cloud Firestore.
 
 ### GeoFire
 
@@ -262,6 +273,16 @@ fired; however, key moved events might occur independently.
 Updating the search area can be helpful in cases such as when you need to update
 the query to the new visible map area after a user scrolls.
 
+### GeoFireUtils
+
+The `geofire-android-common` library provides the `GeoFireUtils` class which contains utilities for working with geohashes but has no dependency on or integration with a specific database. The `GeoFireUtils` class contains the following utility methods:
+
+  * `String getGeoHashForLocation(@NonNull GeoLocation location)` - compute the geohash string for a given (lat,lng) par with default precision.
+  * `String getGeoHashForLocation(@NonNull GeoLocation location, int precision)` - compute the geohash string for a given (lat, lng) pair with custom precision.
+  * `double getDistanceBetween(@NonNull GeoLocation a, @NonNull GeoLocation b)` - compute the distance, in kilometers, between two locations.
+  * `List<GeoQueryBounds> getGeoHashQueryBounds(@NonNull GeoLocation location, double radius)` - given a center point and a radius distance, compute a set of query bounds that can be joined to find all points within the radius distance of the center.
+
+For a detailed guide on how to use these utilities to add geo querying capabilities to your Cloud Firestore app, see: https://firebase.google.com/docs/firestore/solutions/geoqueries
 
 ## Deployment
 
