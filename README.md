@@ -62,8 +62,8 @@ dependencies {
 
 There are two ways to use GeoFire:
 
-  - GeoFire - an end-to-end solution for adding simple geo queries to apps using Firebase Realtime Database
-  - GeoFireUtils - a set of utilities that make it simple to build a geo query solution for apps using Cloud Firestore
+  - GeoFire - an end-to-end solution for adding simple geo queries to apps using Firebase Realtime Database.
+  - GeoFireUtils - a set of utilities that make it simple to build a geo query solution for any app, such as those using Cloud Firestore.
 
 ### GeoFire
 
