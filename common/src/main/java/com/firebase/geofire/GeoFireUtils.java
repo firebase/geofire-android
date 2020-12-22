@@ -36,11 +36,11 @@ public class GeoFireUtils {
     }
 
     /**
-     * Calculates the distance between two locations in kilometers.
+     * Calculates the distance between two locations in meters.
      *
      * @param a the first location.
      * @param b the second location.
-     * @return the distance between the two locations, in kilometers.
+     * @return the distance between the two locations, in meters.
      */
     public static double getDistanceBetween(@NonNull GeoLocation a, @NonNull GeoLocation b) {
         return GeoUtils.distance(a, b);
