@@ -50,7 +50,7 @@ public class GeoFireUtils {
      * Determines the starting and ending geohashes to use as bounds for a database query.
      *
      * @param location the center of the query.
-     * @param radius   the radius of the query, in kilometers. The maximum radius that is
+     * @param radius   the radius of the query, in meters. The maximum radius that is
      *                 supported is about 8587km.
      * @return a list of query bounds containing between 1 and 9 queries.
      */
