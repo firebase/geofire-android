@@ -3,18 +3,20 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.14.2'
     }
 }
 
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         
     }
@@ -22,17 +24,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    projectName = 'geofire'
-    projectDesc = 'GeoFire for Android Applications'
-
-    githubUrl = 'https://github.com/firebase/geofire-android'
-
-    mavenGroup = 'com.firebase'
-    mavenArtifactId = 'geofire-android'
-    mavenVersion = '3.1.0'
-
-    bintrayOrg = 'geofire'
 }
