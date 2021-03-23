@@ -284,13 +284,67 @@ The `geofire-android-common` library provides the `GeoFireUtils` class which con
 
 For a detailed guide on how to use these utilities to add geo querying capabilities to your Cloud Firestore app, see: https://firebase.google.com/docs/firestore/solutions/geoqueries
 
-## Deployment
+## Publishing
 
-- In your local environment set `$BINTRAY_USER` and `$BINTRAY_KEY` to your
-  Bintray.com username and API key.
-- Checkout and update the master branch.
-- Run `./gradlew clean prepareArtifacts bintrayUpload`
-- On bintray.com, publish the draft artifacts.
+### Credentials
+
+The library is published to Maven Central by the firebase-sonatype account, Googlers can find the
+password for this account in [Valentine](http://valentine/)
+
+### GPG Key
+
+You will need to create a private GPG keyring on your machine, if you don't have one do the
+following steps:
+
+  1. Run `gpg --full-generate-key`
+  1. Choose `RSA and RSA` for the key type
+  1. Use `4096` for the key size
+  1. Use `0` for the expiration (never)
+  1. Use any name, email address, and password
+  
+This creates your key in `~/.gnupg/openpgp-revocs.d/` with `.rev` format. The last 8 characters
+before the `.rev` extension are your **Key ID**.
+
+To export the key, run:
+
+```
+gpg --export-secret-keys -o $HOME/sonatype.gpg
+```
+
+Finally upload your key to the keyserver:
+
+```
+gpg --keyserver hkp://keys.openpgp.org --send-keys <YOUR KEY ID>
+```
+
+### Local Properties
+
+Open your `$HOME/.gradle/gradle.properties` file at and fill in the values:
+
+```
+signing.keyId=<KEY ID>
+signing.password=<PASSWORD YOU CHOSE>
+signing.secretKeyRingFile=<FULL PATH TO YOUR GPG FILE>
+mavenCentralRepositoryUsername=firebase-sonatype
+mavenCentralRepositoryUsername=<PASSWORD FROM VALENTINE>
+```
+
+### Publish
+
+To publish, run:
+
+```
+./gradlew publish
+```
+
+### Release
+
+Follow [the instructions here](https://central.sonatype.org/pages/releasing-the-deployment.html):
+
+  1. Navigate to https://oss.sonatype.org/ and **Log In**
+  1. On the left side click **Build Promotion** and look for the `com.firebase` repo
+  1. Click **Close** ... wait a few minutes (you can check status with **Refresh**)
+  1. Click **Release**
 
 [gh-actions]: https://github.com/firebase/geofire-android/actions
 [gh-actions-badge]: https://github.com/firebase/geofire-android/workflows/Android%20CI/badge.svg
