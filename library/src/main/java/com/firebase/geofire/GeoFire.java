@@ -15,7 +15,7 @@
  */
 package com.firebase.geofire;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.firebase.geofire.core.GeoHash;
 import com.google.firebase.database.DataSnapshot;

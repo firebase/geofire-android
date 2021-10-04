@@ -10,7 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 
     buildTypes {
@@ -26,5 +31,5 @@ configurations.all {
 }
 
 dependencies {
-    implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'androidx.annotation:annotation:1.2.0'
 }
