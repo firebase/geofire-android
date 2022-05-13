@@ -49,12 +49,12 @@ Add a dependency for GeoFire to your app's `build.gradle` file.
 ```groovy
 dependencies {
     // Full GeoFire library for Realtime Database users
-    implementation 'com.firebase:geofire-android:3.1.0'
+    implementation 'com.firebase:geofire-android:3.2.0'
 
     // GeoFire utililty functions for Cloud Firestore users who
     // want to implement their own geo solution, see:
     // https://firebase.google.com/docs/firestore/solutions/geoqueries
-    implementation 'com.firebase:geofire-android-common:3.1.0'
+    implementation 'com.firebase:geofire-android-common:3.2.0'
 }
 ```
 
@@ -285,6 +285,14 @@ The `geofire-android-common` library provides the `GeoFireUtils` class which con
 For a detailed guide on how to use these utilities to add geo querying capabilities to your Cloud Firestore app, see: https://firebase.google.com/docs/firestore/solutions/geoqueries
 
 ## Publishing
+
+### Versioning
+
+We use [SemVer](https://semver.org/) in this project. When you bump a version, be sure to update:
+
+- [common/gradle.properties](common/gradle.properties)
+- [library/gradle.properties](library/gradle.properties)
+- [README.md](README.md)
 
 ### Credentials
 
