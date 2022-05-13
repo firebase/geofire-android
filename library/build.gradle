@@ -37,7 +37,7 @@ configurations.all {
 }
 
 dependencies {
-    api 'com.google.firebase:firebase-database:20.0.2'
+    api 'com.google.firebase:firebase-database:20.0.5'
     api project(':common');
 
     testImplementation 'junit:junit:4.13.2'
