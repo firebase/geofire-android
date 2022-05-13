@@ -15,9 +15,9 @@
  */
 package com.firebase.geofire;
 
-import android.support.annotation.NonNull;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.annotation.NonNull;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.firebase.geofire.example.MainActivity;
 import com.firebase.geofire.testing.GeoFireTestingRule;
