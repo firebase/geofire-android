@@ -336,7 +336,7 @@ signing.keyId=<KEY ID>
 signing.password=<PASSWORD YOU CHOSE>
 signing.secretKeyRingFile=<FULL PATH TO YOUR GPG FILE>
 mavenCentralRepositoryUsername=firebase-sonatype
-mavenCentralRepositoryUsername=<PASSWORD FROM VALENTINE>
+mavenCentralRepositoryPassword=<PASSWORD FROM VALENTINE>
 ```
 
 ### Publish
@@ -352,9 +352,9 @@ To publish, run:
 Follow [the instructions here](https://central.sonatype.org/pages/releasing-the-deployment.html):
 
   1. Navigate to https://oss.sonatype.org/ and **Log In**
-  1. On the left side click **Build Promotion** and look for the `com.firebase` repo
-  1. Click **Close** ... wait a few minutes (you can check status with **Refresh**)
-  1. Click **Release**
+  1. On the left side menu, click **Staging Repositories** (under **Build Promotion**) and look for the `com.firebase` repo
+  1. You should see it with the `Open` status. Click **Close** and wait a few minutes (you can check status by clicking **Refresh**)
+  1. Once the status changes to `Closed`, click **Release**
 
 [gh-actions]: https://github.com/firebase/geofire-android/actions
 [gh-actions-badge]: https://github.com/firebase/geofire-android/workflows/Android%20CI/badge.svg
