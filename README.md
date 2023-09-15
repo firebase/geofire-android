@@ -20,6 +20,8 @@ GeoFire clients are also available for other languages:
   * [JavaScript (Web)](https://github.com/firebase/geofire-js)
   * [Java (Server)](https://github.com/firebase/geofire-java)
 
+For data loading in Python, see [this community implementation](https://github.com/cmcneil/geohash) of GeoHash.
+
 ### Integrating GeoFire with your data
 
 GeoFire is designed as a lightweight add-on to the Firebase Realtime Database. However, to keep things
